@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-
+// Class to define a custom InputDecoration
 class InputDecorations {
 
   static InputDecoration authInputDecoration({

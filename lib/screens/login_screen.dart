@@ -55,16 +55,18 @@ class _LoginForm extends StatelessWidget {
 
     final loginForm = Provider.of<LoginFormProvider>(context);
 
+    // Wrap under Container, in case we want to add Padding
     return Container(
       child: Form(
         key: loginForm.formKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
 
-        child: Column(
+
+        child: Column(    // Place widgets one below to the other
           children: [
             
             TextFormField(
-              autocorrect: false,
+              autocorrect: false,   // avoid autocorrecting each time you text
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecorations.authInputDecoration(
                 hintText: 'john.doe@gmail.com',
@@ -110,9 +112,9 @@ class _LoginForm extends StatelessWidget {
             MaterialButton(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               disabledColor: Colors.grey,
-              elevation: 0,
+              elevation: 0,     // Place as first element on the top of the stack
               color: Colors.deepPurple,
-              child: Container(
+              child: Container(     // Wrap under Container to add padding
                 padding: EdgeInsets.symmetric( horizontal: 80, vertical: 15),
                 child: Text(
                   loginForm.isLoading 
