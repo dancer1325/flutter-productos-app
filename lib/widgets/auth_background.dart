@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class AuthBackground extends StatelessWidget {
-  
+
+  // Widget to pass as argument
   final Widget child;
 
+  // https://dart.dev/language/constructors#initializer-list
   const AuthBackground({
     Key? key, 
     required this.child
@@ -13,8 +15,9 @@ class AuthBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         // color: Colors.red,
-        width: double.infinity,
+        width: double.infinity,   // All device's size
         height: double.infinity,
+        //  Strategy is to overlap several children in a simple way --> Stack
         child: Stack(
           children: [
 
@@ -34,7 +37,7 @@ class _HeaderIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return SafeArea(      // Wrap under SafeArea, to ignore the bottom and top area
       child: Container(
         width: double.infinity,
         margin: EdgeInsets.only( top: 30 ),
@@ -44,20 +47,21 @@ class _HeaderIcon extends StatelessWidget {
   }
 }
 
-
 class _PurpleBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
 
+    // Get device's size
     final size = MediaQuery.of(context).size;
 
-    return Container(
+    return Container(    // Wrap under Container to add the 'decoration' and the child
       width: double.infinity,
-      height: size.height * 0.4,
+      height: size.height * 0.4,      // Place in a certain part of the device's screen
       decoration: _purpleBackground(),
       child: Stack(
         children: [
+          // Widget to indicate the position of a widget into a Stack
           Positioned(child: _Bubble(), top: 90, left: 30 ),
           Positioned(child: _Bubble(), top: -40, left: -30 ),
           Positioned(child: _Bubble(), top: -50, right: -20 ),
@@ -68,6 +72,7 @@ class _PurpleBox extends StatelessWidget {
     );
   }
 
+  // Description to paint a box
   BoxDecoration _purpleBackground() => BoxDecoration(
     gradient: LinearGradient(
       colors: [
@@ -85,6 +90,7 @@ class _Bubble extends StatelessWidget {
     return Container(
       width: 100,
       height: 100,
+      // Description to paint a box
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
         color: Color.fromRGBO(255, 255, 255, 0.05)

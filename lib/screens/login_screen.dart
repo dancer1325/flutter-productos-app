@@ -11,6 +11,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: AuthBackground(
+        // SingleChildScrollView      Restrict the size and in case it overcomes the screen's size --> You will see, doing scroll
         child: SingleChildScrollView(
           child: Column(
             children: [

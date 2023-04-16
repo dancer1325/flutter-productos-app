@@ -27,3 +27,11 @@ samples, guidance on mobile development, and a full API reference.
 * Via terminal
     * `flutter run lib/main.dart`
         * 'lib/main.dart' depends on the relative path between your current terminal and the 'main.dart' file
+
+## Note
+* Architecture of the repo
+    * 'lib'
+        * '/screens'
+            * App's screens
+        * '/widgets'
+            * Widgets to be able to reuse around the screens
