@@ -25,10 +25,12 @@ class LoginScreen extends StatelessWidget {
                     SizedBox( height: 10 ),
                     Text('Login', style: Theme.of(context).textTheme.headline4 ),
                     SizedBox( height: 30 ),
-                    
+
+                    // Alone, without wrapping under MultiProvider, because we just need 1
+                    // ChangeNotifierProvider(create: (_) => new LoginFormProvider() ),    Unnecessary new
                     ChangeNotifierProvider(
                       create: ( _ ) => LoginFormProvider(),
-                      child: _LoginForm()
+                      child: _LoginForm()       // Only Widget in which the ChangeNotifierProvider lives
                     )
                     
 
@@ -53,6 +55,7 @@ class _LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    // Get access to the provider via context
     final loginForm = Provider.of<LoginFormProvider>(context);
 
     // Wrap under Container, in case we want to add Padding
@@ -73,7 +76,7 @@ class _LoginForm extends StatelessWidget {
                 labelText: 'Correo electrónico',
                 prefixIcon: Icons.alternate_email_rounded
               ),
-              onChanged: ( value ) => loginForm.email = value,
+              onChanged: ( value ) => loginForm.email = value,      // Pass to the provider
               validator: ( value ) {      // Validate the input
                   // email regex pattern    https://gist.github.com/Klerith/d2d819ae378ef5a1980fde3557b64d1d
                   String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -97,7 +100,7 @@ class _LoginForm extends StatelessWidget {
                 labelText: 'Contraseña',
                 prefixIcon: Icons.lock_outline
               ),
-              onChanged: ( value ) => loginForm.password = value,
+              onChanged: ( value ) => loginForm.password = value,     // Pass to the provider
               validator: ( value ) {      // Validate the input
                   // Our custom password's rules
                   return ( value != null && value.length >= 6 ) 
@@ -117,25 +120,28 @@ class _LoginForm extends StatelessWidget {
               child: Container(     // Wrap under Container to add padding
                 padding: EdgeInsets.symmetric( horizontal: 80, vertical: 15),
                 child: Text(
-                  loginForm.isLoading 
+                  loginForm.isLoading         // Display different text, depending on isLoading property
                     ? 'Espere'
                     : 'Ingresar',
                   style: TextStyle( color: Colors.white ),
                 )
               ),
-              onPressed: loginForm.isLoading ? null : () async {
-                
+              onPressed: loginForm.isLoading ? null : () async {      // Once the event is null --> the button is disabled
+
+                // Lose keyboard's focus once you click in this button
                 FocusScope.of(context).unfocus();
                 
                 if( !loginForm.isValidForm() ) return;
 
                 loginForm.isLoading = true;
 
+                // Simulate a delay of the button's  validation
                 await Future.delayed(Duration(seconds: 2 ));
 
                 // TODO: validar si el login es correcto
                 loginForm.isLoading = false;
 
+                // Navigate to home screen, once it's validated
                 Navigator.pushReplacementNamed(context, 'home');
               }
             )
