@@ -59,7 +59,7 @@ class _LoginForm extends StatelessWidget {
     return Container(
       child: Form(
         key: loginForm.formKey,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
+        autovalidateMode: AutovalidateMode.onUserInteraction,         // Validate automatically form's fields
 
 
         child: Column(    // Place widgets one below to the other
@@ -74,12 +74,12 @@ class _LoginForm extends StatelessWidget {
                 prefixIcon: Icons.alternate_email_rounded
               ),
               onChanged: ( value ) => loginForm.email = value,
-              validator: ( value ) {
-
+              validator: ( value ) {      // Validate the input
+                  // email regex pattern    https://gist.github.com/Klerith/d2d819ae378ef5a1980fde3557b64d1d
                   String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                   RegExp regExp  = new RegExp(pattern);
                   
-                  return regExp.hasMatch(value ?? '')
+                  return regExp.hasMatch(value ?? '')       // ??     https://www.geeksforgeeks.org/dart-null-aware-operators/
                     ? null
                     : 'El valor ingresado no luce como un correo';
 
@@ -98,8 +98,8 @@ class _LoginForm extends StatelessWidget {
                 prefixIcon: Icons.lock_outline
               ),
               onChanged: ( value ) => loginForm.password = value,
-              validator: ( value ) {
-
+              validator: ( value ) {      // Validate the input
+                  // Our custom password's rules
                   return ( value != null && value.length >= 6 ) 
                     ? null
                     : 'La contraseña debe de ser de 6 caracteres';                                    
