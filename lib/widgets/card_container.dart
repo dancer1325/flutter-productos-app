@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class CardContainer extends StatelessWidget {
 
+  // Widget to pass as argument
   final Widget child;
 
   const CardContainer({
@@ -11,7 +12,7 @@ class CardContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Padding(   // Wrap under Padding, to add padding to the child container
       padding: EdgeInsets.symmetric( horizontal: 30 ),
       child: Container(
           width: double.infinity,
@@ -29,7 +30,7 @@ class CardContainer extends StatelessWidget {
       BoxShadow(
         color: Colors.black12,
         blurRadius: 15,
-        offset: Offset(0, 5),
+        offset: Offset(0, 5),     // Position to move the shadow
       )
     ]
   );
