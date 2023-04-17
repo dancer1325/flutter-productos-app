@@ -22,11 +22,13 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Productos'),
       ),
-      body: ListView.builder(
-        itemCount: productsService.products.length,
+      // ListView
+      // Allows scrolling
+      body: ListView.builder(     //.builder      Create the widgets on demand
+        itemCount: productsService.products.length,       // Number of elements to display
+        // GestureDetector        Widget which detects gestures
         itemBuilder: ( BuildContext context, int index ) => GestureDetector(
           onTap: () {
-
             productsService.selectedProduct = productsService.products[index].copy();
             Navigator.pushNamed(context, 'product');
           },
@@ -38,7 +40,6 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon( Icons.add ),
         onPressed: () {
-
           productsService.selectedProduct = new Product(
             available: false, 
             name: '', 

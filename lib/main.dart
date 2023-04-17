@@ -20,9 +20,6 @@ class AppState extends StatelessWidget {
   }
 }
 
-
-
- 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -31,17 +28,19 @@ class MyApp extends StatelessWidget {
       title: 'Productos App',
       initialRoute: 'home',
       routes: {
+        // _    BuildContext    It's not specified, that's why it's indicated as '_'
         'login'   : ( _ ) => LoginScreen(),
         'home'    : ( _ ) => HomeScreen(),
         'product' : ( _ ) => ProductScreen(),
       },
+      // copyWith()     Create a copy of a theme, and personalize it specifically each desired property
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: Colors.grey[300],
         appBarTheme: AppBarTheme(
           elevation: 0,
           color: Colors.indigo
         ),
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
+        floatingActionButtonTheme: FloatingActionButtonThemeData(       // Customize floatingActionButton's theme
           backgroundColor: Colors.indigo,
           elevation: 0
         )

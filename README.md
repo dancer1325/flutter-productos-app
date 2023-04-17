@@ -1,6 +1,9 @@
 # productos_app
 
-A new Flutter project.
+* Gallery of products which allows
+  * storing products
+  * taking photos
+  * uploading new products
 
 ## Getting Started
 
@@ -14,3 +17,26 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## How to compile?
+* `flutter pub get`
+    * Get the dependencies listed in the 'pubspec.yaml'
+
+## How to run?
+* Via IDE
+    * Android Studio
+        * Select the Flutter Device and 'main.dart'
+        * Click in run button
+* Via terminal
+    * `flutter run lib/main.dart`
+        * 'lib/main.dart' depends on the relative path between your current terminal and the 'main.dart' file
+* Problems:
+  * Problem1: Loading continuously '[VERBOSE-2:dart_vm_initializer.cc(41)] Unhandled Exception: type 'String' '
+
+## Note
+* Architecture of the repo
+    * 'lib'
+        * '/screens'
+            * App's screens
+        * '/widgets'
+            * Widgets to be able to reuse around the screens
