@@ -30,6 +30,7 @@ class HomeScreen extends StatelessWidget {
         itemBuilder: ( BuildContext context, int index ) => GestureDetector(
           onTap: () {
             productsService.selectedProduct = productsService.products[index].copy();
+            // pushNamed instead of pushreplacement to allow coming back
             Navigator.pushNamed(context, 'product');
           },
           child: ProductCard(

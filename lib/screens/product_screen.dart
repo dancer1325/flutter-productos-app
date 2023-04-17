@@ -39,14 +39,17 @@ class _ProductScreenBody extends StatelessWidget {
     final productForm = Provider.of<ProductFormProvider>(context);
 
     return Scaffold(
+      // Wrap under SingleChildScrollView, to make scrolling
       body: SingleChildScrollView(
         // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
           children: [
-
+            // Allows placing widgets one in top to each other
             Stack(
               children: [
                 ProductImage( url: productService.selectedProduct.picture ),
+
+                // Wrap under Positioned to adjust the position to avoid overlapping or not be shown
                 Positioned(
                   top: 60,
                   left: 20,
@@ -126,14 +129,14 @@ class _ProductForm extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10 ),
-      child: Container(
+      child: Container(       // Wrap under Container, in case we want to add Padding
         padding: EdgeInsets.symmetric(horizontal: 20),
         width: double.infinity,
         decoration: _buildBoxDecoration(),
         child: Form(
           key: productForm.formKey,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          child: Column(
+          autovalidateMode: AutovalidateMode.onUserInteraction,    // Validate automatically form's fields
+          child: Column(      // Place widgets one below to the other
             children: [
 
               SizedBox( height: 10 ),
@@ -165,7 +168,7 @@ class _ProductForm extends StatelessWidget {
                     product.price = double.parse(value);
                   }
                 },
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.number,   // Display different default text keyBoard
                 decoration: InputDecorations.authInputDecoration(
                   hintText: '\$150', 
                   labelText: 'Precio:'
@@ -173,6 +176,8 @@ class _ProductForm extends StatelessWidget {
               ),
               
               SizedBox( height: 30 ),
+
+              // List of tiles with a toggle / switch
               SwitchListTile.adaptive(
                 value: product.available, 
                 title: Text('Disponible'),

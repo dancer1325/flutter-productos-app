@@ -22,6 +22,7 @@ class ProductImage extends StatelessWidget {
         height: 450,
         child: Opacity(
           opacity: 0.9,
+          // Wrap under ClipRRect, in order to apply a specific border to the container
           child: ClipRRect(
             borderRadius: BorderRadius.only( topLeft: Radius.circular( 45 ), topRight: Radius.circular(45) ),
             child: getImage(url)

@@ -25,8 +25,9 @@ class ProductCard extends StatelessWidget {
         width: double.infinity,
         height: 400,
         decoration: _cardBorders(),
+        // Allows placing widgets one in top to each other
         child: Stack(
-          alignment: Alignment.bottomLeft,
+          alignment: Alignment.bottomLeft,      // Alignment, based on a point respected to the rectangle
           children: [
 
             _BackgroundImage( product.picture ),
@@ -36,6 +37,7 @@ class ProductCard extends StatelessWidget {
               subTitle: product.id!,
             ),
 
+            // Widget to indicate the position of a widget into a Stack
             Positioned(
               top: 0,
               right: 0,
@@ -103,7 +105,7 @@ class _PriceTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: FittedBox(
+      child: FittedBox(   // Wrap under FittedBox, to adapt the text to the space
         fit: BoxFit.contain,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10 ),
@@ -135,7 +137,7 @@ class _ProductDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Padding(
+    return Padding(   // Wrap under Padding, to add a padding
       padding: EdgeInsets.only( right: 50 ),
       child: Container(
         padding: EdgeInsets.symmetric( horizontal: 20, vertical: 10 ),
@@ -149,7 +151,7 @@ class _ProductDetails extends StatelessWidget {
               title, 
               style: TextStyle( fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
               maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+              overflow: TextOverflow.ellipsis,    // Avoid text is larger than figure containing it
             ),
             Text(
               subTitle, 
@@ -175,6 +177,7 @@ class _BackgroundImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Wrap under ClipRRect, in order to apply the blur just to the specific container
     return ClipRRect(
       borderRadius: BorderRadius.circular(25),
       child: Container(
@@ -185,9 +188,10 @@ class _BackgroundImage extends StatelessWidget {
               image: AssetImage('assets/no-image.png'),
               fit: BoxFit.cover
             )
+          // An image which shows a placeholder image, while it's loading
           : FadeInImage(
             placeholder: AssetImage('assets/jar-loading.gif'),
-            image: NetworkImage(url!),
+            image: NetworkImage(url!),      // Fetch the image from the given URL, being cached
             fit: BoxFit.cover,
           ),
       ),
