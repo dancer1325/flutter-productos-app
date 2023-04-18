@@ -26,7 +26,7 @@ class ProductsService extends ChangeNotifier {
   // Unnecessary to return something, since it could be void for our purposes
   Future<List<Product>> loadProducts() async {
     this.isLoading = true;
-    notifyListeners();      // Notify any Widget, once we are loading the products
+    notifyListeners();      // Notify any Widget, that we are loading the products
 
     // Create the uri and make the HTTP requests
     final url = Uri.https( _baseUrl, 'products.json');
@@ -51,9 +51,8 @@ class ProductsService extends ChangeNotifier {
   }
 
   Future saveOrCreateProduct( Product product ) async {
-
     isSaving = true;
-    notifyListeners();
+    notifyListeners();    // Notify any Widget, that we are saving the products
 
     if ( product.id == null ) {
       // Es necesario crear
@@ -63,37 +62,39 @@ class ProductsService extends ChangeNotifier {
       await this.updateProduct( product );
     }
 
-
-
+    // Once the products have been already saved. We notify again, to redraw again the Widgets listening it
     isSaving = false;
     notifyListeners();
 
   }
 
+  // notifyListeners()    isn't invoked here, because it's used where this function is invoked
   Future<String> updateProduct( Product product ) async {
-
+    // Create the uri (firebase concatenates the id in the next way to get it) and make the HTTP requests
     final url = Uri.https( _baseUrl, 'products/${ product.id }.json');
     final resp = await http.put( url, body: product.toJson() );
     final decodedData = resp.body;
+    print("decodedData $decodedData");
 
-    //TODO: Actualizar el listado de productos
+    // Identify the element that we are updating, to update the list of products
     final index = this.products.indexWhere((element) => element.id == product.id );
     this.products[index] = product;
 
     return product.id!;
-
   }
 
+  // notifyListeners()    isn't invoked here, because it's used where this function is invoked
   Future<String> createProduct( Product product ) async {
-
+    // Create the uri and make the HTTP request
     final url = Uri.https( _baseUrl, 'products.json');
     final resp = await http.post( url, body: product.toJson() );
-    final decodedData = json.decode( resp.body );
+    final decodedData = json.decode( resp.body );   // body is JSON, but we want to convert to a Map
 
+    // Response contains 'name' property which we can use as Id
     product.id = decodedData['name'];
 
+    // Update to the list of products
     this.products.add(product);
-    
 
     return product.id!;
 

@@ -48,5 +48,5 @@ samples, guidance on mobile development, and a full API reference.
   * ways to connect to it
     * REST API
       * Example: Firebase
-        * Sign in, Create a new project, Disable Google Analytics
+        * Sign in, Create a new project, Disable Google Analytics, Configure the data with the 'Product' model structure
     * Web Socket

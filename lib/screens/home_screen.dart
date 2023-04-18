@@ -41,6 +41,7 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon( Icons.add ),
         onPressed: () {
+          // Create a new dummy product as selected one
           productsService.selectedProduct = new Product(
             available: false, 
             name: '', 

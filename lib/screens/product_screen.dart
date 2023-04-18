@@ -37,7 +37,7 @@ class _ProductScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    // Get ProductFormProvider provider
     final productForm = Provider.of<ProductFormProvider>(context);
 
     return Scaffold(
@@ -104,7 +104,7 @@ class _ProductScreenBody extends StatelessWidget {
           ? CircularProgressIndicator( color: Colors.white )
           : Icon( Icons.save_outlined ),
         onPressed: productService.isSaving 
-          ? null
+          ? null      // Disabled the event
           : () async {
           
           if ( !productForm.isValidForm() ) return;
