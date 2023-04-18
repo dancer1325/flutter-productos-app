@@ -6,13 +6,15 @@ import 'dart:convert';
 
 import 'package:productos_app/models/models.dart';
 
+// Generated via quickType
 class Product {
+    // Customize the properties to indicate which one are required
     Product({
         required this.available,
         required this.name,
         this.picture,
         required this.price,
-        this.id
+        this.id         // Optional, because we couldn't know, once we create it
     });
 
     bool available;
@@ -39,6 +41,8 @@ class Product {
         "price": price,
     };
 
+    // Dart handles the instances as references --> if you pass the instance, it will be changed
+    // Method to create a replica of the instance
     Product copy() => Product(
       available: this.available,
       name: this.name,

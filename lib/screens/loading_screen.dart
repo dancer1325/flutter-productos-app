@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Widget to be displayed once the products are being loaded
 class LoadingScreen extends StatelessWidget {
 
   @override

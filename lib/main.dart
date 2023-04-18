@@ -13,9 +13,11 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        // By default, lazy is true === Next line is the same current behavior
+        // ChangeNotifierProvider(create: ( _ ) => ProductsService(), lazy: true )
         ChangeNotifierProvider(create: ( _ ) => ProductsService() )
       ],
-      child: MyApp(),
+      child: MyApp(),   // Instantiate ProductService, once somebody goes to the global page
     );
   }
 }

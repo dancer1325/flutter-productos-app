@@ -6,7 +6,7 @@ class ProductCard extends StatelessWidget {
   final Product product;
 
   const ProductCard({
-    Key? key, 
+    Key? key,             // Let as optional, in case we need it
     required this.product
   }) : super(key: key);
 
@@ -34,7 +34,7 @@ class ProductCard extends StatelessWidget {
 
             _ProductDetails(
               title: product.name,
-              subTitle: product.id!,
+              subTitle: product.id!,    // !    Because it could not exist
             ),
 
             // Widget to indicate the position of a widget into a Stack
@@ -98,8 +98,10 @@ class _NotAvailable extends StatelessWidget {
 
 class _PriceTag extends StatelessWidget {
 
+  // Instead to pass all the product, just the necessary properties
   final double price;
 
+  // Constructor based on position, since it has got 1! element
   const _PriceTag( this.price );
 
   @override
@@ -109,6 +111,8 @@ class _PriceTag extends StatelessWidget {
         fit: BoxFit.contain,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10 ),
+          // $$price    Interpolate the double
+          // \$$price   / to escape $ under String
           child: Text('\$$price', style: TextStyle( color: Colors.white, fontSize: 20 ))
         ),
       ),
@@ -125,6 +129,7 @@ class _PriceTag extends StatelessWidget {
 
 class _ProductDetails extends StatelessWidget {
 
+  // Instead to pass all the product, just the necessary properties
   final String title;
   final String subTitle;
 
@@ -173,6 +178,7 @@ class _BackgroundImage extends StatelessWidget {
  
   final String? url;
 
+  // Constructor based on position, since it has got 1! element
   const _BackgroundImage( this.url );
 
   @override
@@ -183,7 +189,7 @@ class _BackgroundImage extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: 400,
-        child: url == null
+        child: url == null      // Handling that url doesn't come
           ? Image(
               image: AssetImage('assets/no-image.png'),
               fit: BoxFit.cover

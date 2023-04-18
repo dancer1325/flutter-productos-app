@@ -12,11 +12,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    // Get ProductsService provider
     final productsService = Provider.of<ProductsService>(context);
     
     if( productsService.isLoading ) return LoadingScreen();
-
 
     return Scaffold(
       appBar: AppBar(
@@ -29,6 +28,7 @@ class HomeScreen extends StatelessWidget {
         // GestureDetector        Widget which detects gestures
         itemBuilder: ( BuildContext context, int index ) => GestureDetector(
           onTap: () {
+            // Create a copy of the instance, to avoid undesired changes by Dart which handles instances by references
             productsService.selectedProduct = productsService.products[index].copy();
             // pushNamed instead of pushreplacement to allow coming back
             Navigator.pushNamed(context, 'product');

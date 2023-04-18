@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:productos_app/models/models.dart';
 import 'package:http/http.dart' as http;
 
-
+// Extend from ChangeNotifier to make easier life to handle via Provider
 class ProductsService extends ChangeNotifier {
 
+  // Our firebase's realtime database url
+  // It should be changed by yours
   final String _baseUrl = 'flutter-varios-14e0e-default-rtdb.firebaseio.com';
   final List<Product> products = [];
   late Product selectedProduct;
@@ -21,30 +23,32 @@ class ProductsService extends ChangeNotifier {
     this.loadProducts();
   }
 
+  // Unnecessary to return something, since it could be void for our purposes
   Future<List<Product>> loadProducts() async {
-
     this.isLoading = true;
-    notifyListeners();
-    
+    notifyListeners();      // Notify any Widget, once we are loading the products
+
+    // Create the uri and make the HTTP requests
     final url = Uri.https( _baseUrl, 'products.json');
     final resp = await http.get( url );
 
+    // resp.body    String
     final Map<String, dynamic> productsMap = json.decode( resp.body );
 
     productsMap.forEach((key, value) {
+      print('key $key and value $value');
       final tempProduct = Product.fromMap( value );
       tempProduct.id = key;
       this.products.add( tempProduct );
     });
 
-
+    // Once the products have been already loaded. We notify again, to redraw again the Widgets listening it
     this.isLoading = false;
     notifyListeners();
 
     return this.products;
 
   }
-
 
   Future saveOrCreateProduct( Product product ) async {
 
@@ -65,7 +69,6 @@ class ProductsService extends ChangeNotifier {
     notifyListeners();
 
   }
-  
 
   Future<String> updateProduct( Product product ) async {
 
@@ -95,7 +98,6 @@ class ProductsService extends ChangeNotifier {
     return product.id!;
 
   }
-  
 
   void updateSelectedProductImage( String path ) {
 

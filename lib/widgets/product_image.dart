@@ -20,6 +20,7 @@ class ProductImage extends StatelessWidget {
         decoration: _buildBoxDecoration(),
         width: double.infinity,
         height: 450,
+        // Wrap under Opacity, to display camera icon although the image's background is of the same color
         child: Opacity(
           opacity: 0.9,
           // Wrap under ClipRRect, in order to apply a specific border to the container
@@ -55,7 +56,7 @@ class ProductImage extends StatelessWidget {
 
     if ( picture.startsWith('http') ) 
         return FadeInImage(
-          image: NetworkImage( this.url! ),
+          image: NetworkImage( this.url! ),     // !    I handle it
           placeholder: AssetImage('assets/jar-loading.gif'),
           fit: BoxFit.cover,
         );

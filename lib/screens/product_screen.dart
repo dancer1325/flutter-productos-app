@@ -15,11 +15,13 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    // Get ProductsService provider
     final productService = Provider.of<ProductsService>(context);
 
     return ChangeNotifierProvider(
+      // Based on our designed flow, always that we instantiate this provider, we will have a product selected
       create: ( _ ) => ProductFormProvider( productService.selectedProduct ),
+      // Provider just needs to be available in this child
       child: _ProductScreenBody(productService: productService),
     );
   }
@@ -39,8 +41,9 @@ class _ProductScreenBody extends StatelessWidget {
     final productForm = Provider.of<ProductFormProvider>(context);
 
     return Scaffold(
-      // Wrap under SingleChildScrollView, to make scrolling
+      // Wrap under SingleChildScrollView, to make scrolling. This behavior can be not desired
       body: SingleChildScrollView(
+        // Once you scroll --> Hide the keyboard
         // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
           children: [
@@ -120,10 +123,10 @@ class _ProductScreenBody extends StatelessWidget {
 
 class _ProductForm extends StatelessWidget {
 
-
   @override
   Widget build(BuildContext context) {
-
+    // Get ProductFormProvider provider
+    // Display in other widgets the information passed to the ProductForm widget
     final productForm = Provider.of<ProductFormProvider>(context);
     final product = productForm.product;
 
@@ -144,7 +147,7 @@ class _ProductForm extends StatelessWidget {
               TextFormField(
                 initialValue: product.name,
                 onChanged: ( value ) => product.name = value,
-                validator: ( value ) {
+                validator: ( value ) {    // Validate the input
                   if ( value == null || value.length < 1 )
                     return 'El nombre es obligatorio'; 
                 },
@@ -158,9 +161,11 @@ class _ProductForm extends StatelessWidget {
 
               TextFormField(
                 initialValue: '${product.price}',
+                // Restrict the inputs to enter
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp(r'^(\d+)?\.?\d{0,2}'))
                 ],
+                // Implemented logic to handle number. Even like a validation is done --> skip define validator
                 onChanged: ( value ) {
                   if ( double.tryParse(value) == null ) {
                     product.price = 0;
@@ -182,6 +187,8 @@ class _ProductForm extends StatelessWidget {
                 value: product.available, 
                 title: Text('Disponible'),
                 activeColor: Colors.indigo,
+                //  onChanged: (value) => productForm.updateAvailability(value)
+                // Since there is just 1! argument --> it can be skipped to indicate
                 onChanged: productForm.updateAvailability
               ),
 

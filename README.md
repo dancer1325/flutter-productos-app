@@ -37,6 +37,16 @@ samples, guidance on mobile development, and a full API reference.
 * Architecture of the repo
     * 'lib'
         * '/screens'
-            * App's screens
+          * App's screens
+        * '/models'
+          * Generated via pasting the json model to [quickType](https://app.quicktype.io/)
+        * '/services'
+          * Handle HTTP requests
         * '/widgets'
-            * Widgets to be able to reuse around the screens
+          * Widgets to be able to reuse around the screens
+* Backend
+  * ways to connect to it
+    * REST API
+      * Example: Firebase
+        * Sign in, Create a new project, Disable Google Analytics
+    * Web Socket
