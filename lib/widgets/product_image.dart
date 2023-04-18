@@ -47,13 +47,14 @@ class ProductImage extends StatelessWidget {
 
 
   Widget getImage( String? picture ) {
-
+    // In case the Product doesn't contain picture related to
     if ( picture == null ) 
       return Image(
           image: AssetImage('assets/no-image.png'),
           fit: BoxFit.cover,
         );
 
+    // In case the Product contains picture, which in fact it's already uploaded
     if ( picture.startsWith('http') ) 
         return FadeInImage(
           image: NetworkImage( this.url! ),     // !    I handle it
@@ -62,6 +63,7 @@ class ProductImage extends StatelessWidget {
         );
 
 
+    // In case the Product contains picture, but it's not yet uploaded or saved
     return Image.file(
       File( picture ),
       fit: BoxFit.cover,

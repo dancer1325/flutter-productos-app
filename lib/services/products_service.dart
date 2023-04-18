@@ -101,30 +101,31 @@ class ProductsService extends ChangeNotifier {
   }
 
   void updateSelectedProductImage( String path ) {
-
+    // This path doesn't contain 'http', since it's a path in our file system
     this.selectedProduct.picture = path;
     this.newPictureFile = File.fromUri( Uri(path: path) );
 
-    notifyListeners();
-
+    notifyListeners();  // Notify any Widget, which it's listening the ProductsService
   }
 
+  // String?      Optional, because nothing could be returned, in case something fails during the uploading
   Future<String?> uploadImage() async {
-
+    // In case there is no new picture selected to assign to the product
     if (  this.newPictureFile == null ) return null;
 
-    this.isSaving = true;
+    this.isSaving = true;     // Notify any Widget, that we are saving the products
     notifyListeners();
 
-    final url = Uri.parse('https://api.cloudinary.com/v1_1/dx0pryfzn/image/upload?upload_preset=autwc6pa');
+    // Make the post request to upload the image to cloudinary
+    // 1. Uri.https
+    // Uri.https( _baseCloudinaryUrl, 'image/upload?upload_preset=autwc6pa');
 
+    // 2. http.MultipartRequest();
+    final url = Uri.parse('https://api.cloudinary.com/v1_1/dx0pryfzn/image/upload?upload_preset=autwc6pa');   // Uri.parse(UploadMediaURLWithoutFile)
     final imageUploadRequest = http.MultipartRequest('POST', url );
-
     final file = await http.MultipartFile.fromPath('file', newPictureFile!.path );
-
     imageUploadRequest.files.add(file);
-
-    final streamResponse = await imageUploadRequest.send();
+    final streamResponse = await imageUploadRequest.send();       // Make the request finally
     final resp = await http.Response.fromStream(streamResponse);
 
     if ( resp.statusCode != 200 && resp.statusCode != 201 ) {
@@ -136,7 +137,7 @@ class ProductsService extends ChangeNotifier {
     this.newPictureFile = null;
 
     final decodedData = json.decode( resp.body );
-    return decodedData['secure_url'];
+    return decodedData['secure_url'];       // Get the field with the secure_url to get access to the media via internet
 
   }
 

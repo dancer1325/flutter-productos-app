@@ -67,9 +67,11 @@ class _ProductScreenBody extends StatelessWidget {
                   right: 20,
                   child: IconButton(
                     onPressed: () async {
-                      
+
+                      // Use image_picker dependency
                       final picker = new ImagePicker();
                       final PickedFile? pickedFile = await picker.getImage(
+                        // Based on source, you can indicate how to get the image. If you would like different one's --> create several buttons
                         // source: ImageSource.gallery,
                         source: ImageSource.camera,
                         imageQuality: 100
@@ -80,9 +82,9 @@ class _ProductScreenBody extends StatelessWidget {
                         return;
                       }
 
+                      // pickedFile.path      Know the image's path into the device
+                      print("pickedFile.path ${pickedFile.path}");
                       productService.updateSelectedProductImage(pickedFile.path);
-                      
-
                     }, 
                     icon: Icon( Icons.camera_alt_outlined, size: 40, color: Colors.white ),
                   )
@@ -109,10 +111,12 @@ class _ProductScreenBody extends StatelessWidget {
           
           if ( !productForm.isValidForm() ) return;
 
+          // Upload the image to Cloudinary, retrieving the secureURL
           final String? imageUrl = await productService.uploadImage();
 
           if ( imageUrl != null ) productForm.product.picture = imageUrl;
 
+          // Save or create the product, assigning the picture url to the product in Firebase
           await productService.saveOrCreateProduct(productForm.product);
 
         },
