@@ -52,6 +52,7 @@ samples, guidance on mobile development, and a full API reference.
           * 'lib/main.dart' depends on the relative path between your current terminal and the 'main.dart' file
 * Problems:
   * Problem1: Loading continuously '[VERBOSE-2:dart_vm_initializer.cc(41)] Unhandled Exception: type 'String' '
+    * Solution: You haven't configured the proper firebase's cloud name url
 
 ## Note
 * Architecture of the repo
