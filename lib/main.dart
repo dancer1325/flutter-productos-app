@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
         'login'   : ( _ ) => LoginScreen(),
         'register': ( _ ) => RegisterScreen(),
       },
+      // NotificationsService.messengerKey is a static property   --> NotificationsService doesn't need to be instantiated
       scaffoldMessengerKey: NotificationsService.messengerKey,
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: Colors.grey[300],
