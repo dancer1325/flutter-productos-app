@@ -82,7 +82,10 @@ class AuthService extends ChangeNotifier {
     return;
   }
 
+  // Read the token
+  // Since we have got the idea to use in a FutureBuilder, if this method would return null === it hasn't got data
   Future<String> readToken() async {
+    // .read    It can return a null --> In case, it doesn't exist, we return ''
     return await storage.read(key: 'token') ?? '';
 
   }

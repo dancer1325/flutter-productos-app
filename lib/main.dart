@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Productos App',
       initialRoute: 'login',
+      // Routes are ordered, giving an empty white line, by categories
       routes: {
         
         'checking': ( _ ) => CheckAuthScreen(),
