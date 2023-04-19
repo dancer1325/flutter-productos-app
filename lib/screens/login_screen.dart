@@ -37,8 +37,11 @@ class LoginScreen extends StatelessWidget {
               ),
 
               SizedBox( height: 50 ),
+
+              // Button to redirect to the RegisterScreen
               TextButton(
-                onPressed: () => Navigator.pushReplacementNamed(context, 'register'), 
+                // pushReplacementNamed   Because we don't want to let coming back to the previous screen
+                onPressed: () => Navigator.pushReplacementNamed(context, 'register'),
                 style: ButtonStyle(
                   overlayColor: MaterialStateProperty.all( Colors.indigo.withOpacity(0.1)),
                   shape: MaterialStateProperty.all( StadiumBorder() )

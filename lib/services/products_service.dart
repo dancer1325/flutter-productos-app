@@ -10,6 +10,8 @@ import 'package:productos_app/models/models.dart';
 
 class ProductsService extends ChangeNotifier {
 
+  // Our firebase's realtime database url
+  // It should be changed by yours
   final String _baseUrl = 'flutter-varios-14e0e-default-rtdb.firebaseio.com';
   final List<Product> products = [];
   late Product selectedProduct;

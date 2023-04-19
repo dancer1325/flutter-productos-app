@@ -7,6 +7,7 @@ import 'package:productos_app/services/services.dart';
 import 'package:productos_app/ui/input_decorations.dart';
 import 'package:productos_app/widgets/widgets.dart';
 
+// Mirror of the LoginScreen
 class RegisterScreen extends StatelessWidget {
 
   @override
@@ -38,6 +39,8 @@ class RegisterScreen extends StatelessWidget {
               ),
 
               SizedBox( height: 50 ),
+
+              // Similar button to the one placed in LoginScreen
               TextButton(
                 onPressed: () => Navigator.pushReplacementNamed(context, 'login'), 
                 style: ButtonStyle(
@@ -54,7 +57,6 @@ class RegisterScreen extends StatelessWidget {
    );
   }
 }
-
 
 class _LoginForm extends StatelessWidget {
 
@@ -132,20 +134,20 @@ class _LoginForm extends StatelessWidget {
               onPressed: loginForm.isLoading ? null : () async {
                 
                 FocusScope.of(context).unfocus();
+
+                // Not required to get here, because it's accessible to all the whole application, since it has been defined as main level
+                // listen: false    If it's true, it would throw an error since it's into the method
                 final authService = Provider.of<AuthService>(context, listen: false);
                 
                 if( !loginForm.isValidForm() ) return;
 
                 loginForm.isLoading = true;
 
-
-                // TODO: validar si el login es correcto
                 final String? errorMessage = await authService.createUser(loginForm.email, loginForm.password);
 
                 if ( errorMessage == null ) {
                   Navigator.pushReplacementNamed(context, 'home');
                 } else {
-                  // TODO: mostrar error en pantalla
                   print( errorMessage );
                   loginForm.isLoading = false;
                 }

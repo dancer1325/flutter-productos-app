@@ -20,6 +20,16 @@ samples, guidance on mobile development, and a full API reference.
     * Get the dependencies listed in the 'pubspec.yaml'
 
 ## How to run?
+* Configuration
+  * Use a backend to handle your authentication
+    * [Firebase](https://firebase.google.com/)
+      * Sign in, Create a new project, Disable Google Analytics, Authentication, Choose your desired sign-in method
+  * Use a backend to store your model and media
+    * [Firebase](https://firebase.google.com/)
+      * Sign in, Create a new project, Disable Google Analytics, Configure the data with the 'Product' model structure
+    * [Cloudinary](https://cloudinary.com/)
+      * Sign in
+      * Follow the specific [Flutter SDK](https://console.cloudinary.com/documentation/flutter_integration)
 * Configure your device
     * Simulator
         * Built-in IDE

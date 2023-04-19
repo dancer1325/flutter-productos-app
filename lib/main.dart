@@ -12,6 +12,7 @@ class AppState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
+      // Next providers will be accessible to the child
       providers: [
         ChangeNotifierProvider(create: ( _ ) => AuthService() ),
         ChangeNotifierProvider(create: ( _ ) => ProductsService() ),
@@ -20,9 +21,6 @@ class AppState extends StatelessWidget {
     );
   }
 }
-
-
-
  
 class MyApp extends StatelessWidget {
   @override
