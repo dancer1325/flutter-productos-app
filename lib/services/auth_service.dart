@@ -13,6 +13,7 @@ class AuthService extends ChangeNotifier {
   // It should be changed by yours
   final String _firebaseToken = 'AIzaSyBcytoCbDUARrX8eHpcR-Bdrdq0yUmSjf8';
 
+  // Store firebaseToken in a secure way
   final storage = new FlutterSecureStorage();
 
 
@@ -75,13 +76,13 @@ class AuthService extends ChangeNotifier {
 
   }
 
+  // Logout === Delete the token got, to force loading again
   Future logout() async {
     await storage.delete(key: 'token');
     return;
   }
 
   Future<String> readToken() async {
-
     return await storage.read(key: 'token') ?? '';
 
   }
