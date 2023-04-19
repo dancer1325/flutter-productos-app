@@ -20,13 +20,26 @@ samples, guidance on mobile development, and a full API reference.
     * Get the dependencies listed in the 'pubspec.yaml'
 
 ## How to run?
-* Via IDE
-    * Android Studio
-        * Select the Flutter Device and 'main.dart'
-        * Click in run button
-* Via terminal
-    * `flutter run lib/main.dart`
-        * 'lib/main.dart' depends on the relative path between your current terminal and the 'main.dart' file
+* Configure your device
+  * Simulator
+    * Built-in IDE
+      * JetBrains
+        * Tools, Device Manager, Configure it, Run it
+      * VSC
+        * Command palette, Flutter Select Device
+    * Installed one's
+      * Simulator [MacOs]
+          * `open -a Simulator`
+  * Real physical
+    * [MacOs] https://docs.flutter.dev/get-started/install/macos#deploy-to-ios-devices
+* Run your flutter project
+  * Via IDE
+      * Android Studio
+          * Select the Flutter Device and 'main.dart'
+          * Click in run button
+  * Via terminal
+      * `flutter run lib/main.dart`
+          * 'lib/main.dart' depends on the relative path between your current terminal and the 'main.dart' file
 
 ## Note
 * Architecture of the repo
