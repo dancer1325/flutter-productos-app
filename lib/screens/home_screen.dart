@@ -14,6 +14,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final productsService = Provider.of<ProductsService>(context);
+    // listen: false    We don't need to redraw this Screen if authService is listened
     final authService = Provider.of<AuthService>(context, listen: false);
     
     if( productsService.isLoading ) return LoadingScreen();
@@ -22,10 +23,11 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Productos'),
-        leading: IconButton(
+        leading: IconButton(      //  leading       Widget to be displayed in the top left
           icon: Icon( Icons.login_outlined ),
           onPressed: () {
 
+            // We don't want to wait for logout async process, since we want to redirect to the LoginScreen as fast as possible
             authService.logout();
             Navigator.pushReplacementNamed(context, 'login');
 
