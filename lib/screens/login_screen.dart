@@ -134,20 +134,21 @@ class _LoginForm extends StatelessWidget {
               onPressed: loginForm.isLoading ? null : () async {
                 
                 FocusScope.of(context).unfocus();
+
+                // Not required to get here, because it's accessible to all the whole application, since it has been defined as main level
+                // listen: false    If it's true, it would throw an error since it's into the method
                 final authService = Provider.of<AuthService>(context, listen: false);
                 
                 if( !loginForm.isValidForm() ) return;
 
                 loginForm.isLoading = true;
 
-
-                // TODO: validar si el login es correcto
+                // Validate if the login is correctly done
                 final String? errorMessage = await authService.login(loginForm.email, loginForm.password);
 
                 if ( errorMessage == null ) {
                   Navigator.pushReplacementNamed(context, 'home');
                 } else {
-                  // TODO: mostrar error en pantalla
                   // print( errorMessage );
                   NotificationsService.showSnackbar(errorMessage);
                   loginForm.isLoading = false;

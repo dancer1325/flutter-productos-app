@@ -143,6 +143,7 @@ class _LoginForm extends StatelessWidget {
 
                 loginForm.isLoading = true;
 
+                // Validate if the registration is correctly done
                 final String? errorMessage = await authService.createUser(loginForm.email, loginForm.password);
 
                 if ( errorMessage == null ) {

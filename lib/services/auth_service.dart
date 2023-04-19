@@ -46,8 +46,9 @@ class AuthService extends ChangeNotifier {
 
   }
 
+  // Validate the user already created
   Future<String?> login( String email, String password ) async {
-
+    // The way to send the body in a request is via JSON serialized map
     final Map<String, dynamic> authData = {
       'email': email,
       'password': password,
@@ -61,12 +62,14 @@ class AuthService extends ChangeNotifier {
     final resp = await http.post(url, body: json.encode(authData));
     final Map<String, dynamic> decodedResp = json.decode( resp.body );
 
+    // 'idToken'    attribute with the token
     if ( decodedResp.containsKey('idToken') ) {
         // Token hay que guardarlo en un lugar seguro
         // decodedResp['idToken'];
         await storage.write(key: 'token', value: decodedResp['idToken']);
         return null;
     } else {
+      // error.message    attribute to display the error of the request
       return decodedResp['error']['message'];
     }
 
