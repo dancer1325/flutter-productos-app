@@ -24,7 +24,7 @@ class AuthService extends ChangeNotifier {
     final Map<String, dynamic> authData = {
       'email': email,
       'password': password,
-      'returnSecureToken': true
+      'returnSecureToken': true     // If we don't add it, the token retrieved can't be used afterwards to authenticate future calls
     };
 
     final url = Uri.https(_baseUrl, '/v1/accounts:signUp', {
@@ -53,7 +53,7 @@ class AuthService extends ChangeNotifier {
     final Map<String, dynamic> authData = {
       'email': email,
       'password': password,
-      'returnSecureToken': true
+      'returnSecureToken': true   // If we don't add it, the token retrieved can't be used afterwards to authenticate future calls
     };
 
     final url = Uri.https(_baseUrl, '/v1/accounts:signInWithPassword', {

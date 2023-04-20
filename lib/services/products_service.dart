@@ -16,6 +16,8 @@ class ProductsService extends ChangeNotifier {
   final List<Product> products = [];
   late Product selectedProduct;
 
+  // Create an instance to retrieve the idToken, stored securely, to authenticate
+  // the queries to FireBase
   final storage = new FlutterSecureStorage();
 
   File? newPictureFile;
@@ -31,7 +33,8 @@ class ProductsService extends ChangeNotifier {
 
     this.isLoading = true;
     notifyListeners();
-    
+
+    // Once you configure security rules to retrieve data --> you need to pass the idToken
     final url = Uri.https( _baseUrl, 'products.json', {
       'auth': await storage.read(key: 'token') ?? ''
     });
@@ -77,6 +80,7 @@ class ProductsService extends ChangeNotifier {
 
   Future<String> updateProduct( Product product ) async {
 
+    // Once you configure security rules to retrieve data --> you need to pass the idToken
     final url = Uri.https( _baseUrl, 'products/${ product.id }.json', {
       'auth': await storage.read(key: 'token') ?? ''
     });
@@ -94,6 +98,7 @@ class ProductsService extends ChangeNotifier {
 
   Future<String> createProduct( Product product ) async {
 
+    // Once you configure security rules to retrieve data --> you need to pass the idToken
     final url = Uri.https( _baseUrl, 'products.json',{
       'auth': await storage.read(key: 'token') ?? ''
     });

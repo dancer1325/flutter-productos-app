@@ -27,6 +27,7 @@ samples, guidance on mobile development, and a full API reference.
   * Use a backend to store your model and media
     * [Firebase](https://firebase.google.com/)
       * Sign in, Create a new project, Disable Google Analytics, Configure the data with the 'Product' model structure
+      * Edit rules to allow jus for authenticated users `auth != null`
     * [Cloudinary](https://cloudinary.com/)
       * Sign in
       * Follow the specific [Flutter SDK](https://console.cloudinary.com/documentation/flutter_integration)
